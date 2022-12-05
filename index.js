@@ -26,7 +26,24 @@ const inquirerQuestions = questions.map((it) => {
     const responses = await askQuestions()
     console.log(responses)
   }
+  async function generateReadme(answers) {
+    console.log(answers)
 
-  collectAnswersAndGenerateReadMe( )
+  }
+
+  const madeAnswers = {
+  
+        name: "Input",
+        Description: "Readme",
+        Email: 'Email UL',
+        Github: "Github UL",
+        Installation: "Now",
+        Usage: "Usage",
+        License: "Apache license",
+    
+    };
+
+ 
+ generateReadme(madeAnswers)
 
 
