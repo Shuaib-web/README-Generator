@@ -1,0 +1,22 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "This web application is a README.Md generator, this is used to produce a high-grade README. I have utilized the inquirer PACKAGE which has actually permitted me to use inquiries as prompts, I have then made use of the answers to the questions to fill in the README.Md.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shuaib-web/README-Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shuaib-web/README-Generator/issues"
+  },
+  "homepage": "https://github.com/Shuaib-web/README-Generator#readme",
+  "dependencies": {
+    "inquirer": "^9.1.4"
+  }
+}
