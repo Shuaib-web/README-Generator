@@ -19,9 +19,14 @@ const inquirerQuestions = questions.map((it) => {
   })
 
   async function askQuestions() {
-    inquirer.prompt(inquirerQuestions)
+    return await inquirer.prompt(inquirerQuestions)
+  }
+  
+  async function collectAnswersAndGenerateReadMe(){
+    const responses = await askQuestions()
+    console.log(responses)
   }
 
-  askQuestions( )
+  collectAnswersAndGenerateReadMe( )
 
-// console.log(inquirerQuestions)
+
