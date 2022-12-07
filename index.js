@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs'); 
 
 const questions= [
 'Name',
@@ -27,8 +28,9 @@ const inquirerQuestions = questions.map((it) => {
     console.log(responses)
   }
   async function generateReadme(answers) {
-    console.log(answers)
-
+        const READMEDocument = await fs.promises.readFile("./README.md", "utf8");
+        const READMEfile = READMEDocument
+        console.log(READMEDocument);
   }
 
   const madeAnswers = {
