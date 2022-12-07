@@ -30,7 +30,14 @@ const inquirerQuestions = questions.map((it) => {
   async function generateReadme(answers) {
         const READMEDocument = await fs.promises.readFile("./README.md", "utf8");
         const READMEfile = READMEDocument
-        console.log(READMEDocument);
+        .replace("$Name", answers.Title)
+        .replace("$Description", answers.Description)
+        .replace("$Github", answers.Contents)
+        .replace("$Email", answers.Installation)
+        .replace("$License", answers.Usage)
+        .replace("$Usage", answers.License)
+        .replace("$Installation", answers.Contributing)
+        console.log(READMEDocument)
   }
 
   const madeAnswers = {
