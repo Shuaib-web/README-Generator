@@ -1,58 +1,81 @@
-const inquirer = require('inquirer');
-const fs = require('fs'); 
+const inquirer = require("inquirer");
+const fs = require("fs");
+const generateMarkdown = require("./utils/generateMarkdown")
 
-const questions= [
-'Name',
-'Description',
-'GitHub',
-'Email',
-'License', 
-'Usage',
-'Installation'
+// questions holds an array of 7 values(6 indexes)
+const questions = [
+  "Name",
+  "Description",
+  "GitHub",
+  "Email",
+  "License",
+  "Usage",
+  "Installation",
 ];
 
+//loop through questions array and grab each value for 0-6 and spit it out as "it"
 const inquirerQuestions = questions.map((it) => {
-    return {
-      type: "input",
-      name: it,
-      Message: it,
-    };
-  })
+  return {
+    type: "input",
+    name: it,
+    Message: it,
+  };
+});
 
-  async function askQuestions() {
-    return await inquirer.prompt(inquirerQuestions)
-  }
-  
-  async function collectAnswersAndGenerateReadMe(){
-    const responses = await askQuestions()
-    console.log(responses)
-  }
-  async function generateReadme(answers) {
-        const READMEDocument = await fs.promises.readFile("./README.md", "utf8");
-        const READMEfile = READMEDocument
-        .replace("$Name", answers.Title)
-        .replace("$Description", answers.Description)
-        .replace("$Github", answers.Contents)
-        .replace("$Email", answers.Installation)
-        .replace("$License", answers.Usage)
-        .replace("$Usage", answers.License)
-        .replace("$Installation", answers.Contributing)
-        console.log(READMEDocument)
-  }
+// askQuestions() just prompts to user with inquirerQuestions, using questions array
+async function askQuestions() {
+  return await inquirer.prompt(inquirerQuestions);
+}
 
-  const madeAnswers = {
-  
-        name: "Input",
-        Description: "Readme",
-        Email: 'Email UL',
-        Github: "Github UL",
-        Installation: "Now",
-        Usage: "Usage",
-        License: "Apache license",
-    
-    };
+// collectAnswersAndGenerateReadMe() gets data that comes back from inquirer.prompt, and sets it to responses variable, then it calls generateReadme() passing through all of our answers from the prompt, to be used to create a readme
+async function collectAnswersAndGenerateReadMe() {
+  const responses = await askQuestions();
+  await generateReadme(responses);
+}
 
- 
- generateReadme(madeAnswers)
+// reads index.md and the files contents
+// then it replaces, specified contents, with the values from our inquirer prompt
+// then it spits out all of that data, in format, to a README.MD file
+async function generateReadme(answers) {
+  const READMEDocument = await fs.promises.readFile("index.md", "utf8");
+  const READMEfile = READMEDocument.replace(
+    "$Name",
+    `# Title
+${answers.Name}`
+  )
+    .replace(
+      "$Description",
+      `## Description
+${answers.Description}`
+    )
+    .replace(
+      "$Github",
+      `## GitHub
+${answers.GitHub}`
+    )
+    .replace(
+      "$Email",
+      `## Email
+${answers.Email}`
+    )
+    .replace(
+      "$License",
+      `## License
+${answers.License}`
+    )
+    .replace(
+      "$Usage",
+      `## Usage
+${answers.Usage}`
+    )
+    .replace(
+      "$Installation",
+      `## Installation
+${answers.Installation}`
+    );
+  await fs.promises.writeFile("./README.md", READMEfile);
+  console.log(READMEfile);
+}
 
 
+collectAnswersAndGenerateReadMe();
